@@ -1,16 +1,12 @@
+from dotenv import load_dotenv
+load_dotenv()
 from flask import Flask, request, redirect, session, url_for, render_template
 import processing
 import os
-from dotenv import load_dotenv
 
 from spotipy import Spotify
 from spotipy.oauth2 import SpotifyOAuth
 from spotipy.cache_handler import FlaskSessionCacheHandler
-
-load_dotenv()
-CLIENT_SECRET = os.getenv('CLIENT_SECRET')
-CLIENT_ID = os.getenv('CLIENT_ID')
-REDIRECT_URI = os.getenv('REDIRECT_URI')
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(64)
@@ -68,9 +64,11 @@ def get_artists():
         return redirect(sp_oauth.get_authorize_url())
 
     artists = sp.current_user_top_artists(time_range=time_range, limit=30)
-    data = processing.process_artists(artists)
+    stuff = processing.process_artists(artists)
+    map_data = stuff[0]
+    print(stuff)
 
-    return render_template("globe.html", data=data)
+    return render_template("globe.html", data=map_data)
 
 @app.route('/logout')
 def logout():
