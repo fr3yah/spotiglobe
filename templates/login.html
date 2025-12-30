@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Globify</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+</head>
+
+<body>
+    <div id="lg-div">
+        <h1>Globify</h1>
+        <p>Find out where your music is from in a fun, interactive and easily shareable way!</p>
+        <form action="/" method="POST">
+            <div id = "time_dropdown">
+                <select name="time_range">
+                    <option value="long-term">1 year</option>
+                    <option value="medium-term">6 months</option>
+                    <option value="short-term">1 month</option>
+                </select>
+            </div>
+            <button type="submit" name="login_button" value="login" id="lg-btn">Log in</button>
+        </form>
+    </div>  
+
+    <footer id="credits">
+        <p> Made by <a href="https://www.linkedin.com/in/shrey-gautam-89ba4577/">Shrey Gautam</a></p>
+    </footer>
+
+</body>
+</html>
