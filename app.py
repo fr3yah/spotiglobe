@@ -31,7 +31,7 @@ sp_oauth = SpotifyOAuth(
 
 
 def get_spotify_client():
-    """Return a Spotify client for the current user session, refreshing token if needed."""
+    # Return a Spotify client for the current user session, refreshing token if needed.
     token_info = cache_handler.get_cached_token()
     if not token_info:
         return None
@@ -43,10 +43,6 @@ def get_spotify_client():
 @app.route('/')
 def home():
     return render_template("login.html")
-#   if not sp_oauth.validate_token(cache_handler.get_cached_token()):
-#           auth_url=sp_oauth.get_authorize_url()
-#            return redirect(auth_url)
-#    return redirect(url_for('get_artists'))
 
 @app.route("/", methods=['POST'])
 def process_button():
