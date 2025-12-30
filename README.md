@@ -6,3 +6,4 @@ Find out where the music you listen to on Spotify is made in a fun, interactive 
 - Get top five list (done)
 - Find lowest popularity and population (done)
 - Create frontend
+- Think about handling user submitted information
