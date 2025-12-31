@@ -64,11 +64,17 @@ def get_artists():
         return redirect(sp_oauth.get_authorize_url())
 
     artists = sp.current_user_top_artists(time_range=time_range, limit=30)
-    stuff = processing.process_artists(artists)
-    map_data = stuff[0]
-    print(stuff)
+    data = processing.process_artists(artists)
+    map_data = data[0]
+    top_five = data[1]
+    lowest_popularity = data[2]
+    lowest_population = data[3]
+    countries = data[4]
+    diversity = data[5]
 
-    return render_template("globe.html", data=map_data)
+    print(data)
+
+    return render_template("globe.html", map_data=map_data, top_five=top_five, lowest_popularity=lowest_popularity, countries=countries, diversity=diversity, lowest_population=lowest_population)
 
 @app.route('/logout')
 def logout():

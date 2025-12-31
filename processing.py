@@ -109,19 +109,23 @@ def process_artists(initial):
             conn.commit() 
         
 
-    top_5 = artists_data[0:4]
+    top_5 = artists_data[0:5]
     lowest_popularity = min(artists_data, key=lambda a: a["popularity"])
     iso2 = list(map_data.keys())
-    country_names = coco.convert(names=iso2, to='name_short')
+    country_list = coco.convert(names=iso2, to='name_short')
+    country_names = [item for item in country_list if item != "not found"]
     lowest_population = country_names[0]
 
     for i in country_names:
-        if country_names != 'not found':
-            try:
-                if CountryInfo(i).population() < CountryInfo(lowest_population).population():
-                    lowest_population = i
-            except:
-                lowest_population = lowest_population
+        try:
+            if CountryInfo(i).population() < CountryInfo(lowest_population).population():
+                lowest_population = i
+        except:
+            lowest_population = lowest_population
+        
+
+    
+
 
     conn.close()
     return [map_data, top_5, lowest_popularity, lowest_population, country_names, diversity_calc(map_data)] 

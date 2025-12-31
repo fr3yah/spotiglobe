@@ -12,11 +12,30 @@
 
 <body>
     <div id="map"></div>
-    <ul>
-        {% for item in data %}
-            <li>{{ item }}</li>
+    <div>
+        {% for item in top_five %}
+            <div>
+                <p>{{ item['name'] }}</p>
+                <p>{{ item['country'] }}</p>
+                <p>{{ item['popularity'] }}</p>
+            </div>
         {% endfor %}
-    </ul>
+    </div>
+    <div>
+        <h1> Stats </h1>
+        <h2>Countries ({{ countries | length }})</h2>
+        <p>{{ countries | join(', ') }}</p>
+        <div>
+            <h2> Lowest popularity </h2>
+            <p> {{ lowest_popularity['name'] }}</p>
+            <h2> Lowest population </h2>
+            <p>{{ lowest_population }}</p>
+            <h2> Diversity </h2>
+            <p>{{ diversity }}</p>
+        </div>
+    </div>
+    
+
     
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
