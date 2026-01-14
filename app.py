@@ -1,8 +1,9 @@
 from dotenv import load_dotenv
 load_dotenv()
+
 from flask import Flask, request, redirect, session, url_for, render_template
 import processing
-import os
+import json, os
 
 from spotipy import Spotify
 from spotipy.oauth2 import SpotifyOAuth
@@ -25,6 +26,12 @@ sp_oauth = SpotifyOAuth(
     show_dialog=True
 )
 
+def get_geo_json():
+
+    with open('static/data/geo.json', encoding="utf8") as f:
+        data = json.load(f)
+    
+    return data
 
 def get_spotify_client():
     # Return a Spotify client for the current user session, refreshing token if needed.
@@ -74,7 +81,7 @@ def get_artists():
 
     print(data)
 
-    return render_template("globe.html", map_data=map_data, top_five=top_five, lowest_popularity=lowest_popularity, countries=countries, diversity=diversity, lowest_population=lowest_population)
+    return render_template("globe.html", map_data=map_data, top_five=top_five, lowest_popularity=lowest_popularity, countries=countries, diversity=diversity, lowest_population=lowest_population, geoJson = get_geo_json())
 
 @app.route('/logout')
 def logout():
